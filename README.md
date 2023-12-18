@@ -16,13 +16,18 @@ This repository provides a reference implementation of VITA as described in the 
 
 ### Requirements
 The code has been tested running under Python 3.10.6. The required packages are as follows:
-* <span style='background-color:#f6f8fa'>pandas: 1.5.1</span>
-* <span style='background-color:#f6f8fa'>dill: 0.3.6</span>
-* <span style='background-color:#f6f8fa'>torch: 1.8.0+cu111</span>
-* <span style='background-color:#f6f8fa'>rdkit: 2022.9.1</span>
-* <span style='background-color:#f6f8fa'>scikit-learn: 1.1.3</span>
-* <span style='background-color:#f6f8fa'>numpy: 1.23.4</span>
+* pandas: 1.5.1
+* dill: 0.3.6
+* torch: 1.8.0+cu111
+* rdkit: 2022.9.1
+* scikit-learn: 1.1.3
+* numpy: 1.23.4  
+* install other packages if necessary
 
+      pip install rdkit-pypi
+      pip install scikit-learn, dill, dnc
+      pip install torch
+  
       pip install [xxx] # any required package if necessary, maybe do not specify the version
 
 ### Dataset Preparation
@@ -46,4 +51,13 @@ For the MIMIC-III and -IV datasets, the following files are required:
   - drugbank_drugs_info.csv (We provide a sample of this file due to size constraints.)  
   - drug-DDI.csv (We provide a sample of this file due to size constraints.)  
 
+### processing file
+- run data processing file
+
+      python processing_iii.py
+      python processing_iv.py
+- run ddi_mask_H.py
+  
+      python ddi_mask_H.py
+The processed files are already stored in the directories "data/mimic-iii" and "data/mimic-iv".
 
