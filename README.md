@@ -13,3 +13,14 @@ This repository provides a reference implementation of VITA as described in the 
 * Hongil Kim (hong0814@hanyang.ac.kr)
 * Kijung Shin (wook@hanyang.ac.kr)
 * Sang-Wook Kim (kijungs@kaist.ac.kr)
+
+### Requirements
+The code has been tested running under Python 3.10.6. The required packages are as follows:
+* pandas: 1.5.1 
+* dill: 0.3.6
+* torch: 1.8.0+cu111
+* rdkit: 2022.9.1
+* scikit-learn: 1.1.3
+* numpy: 1.23.4  
+
+pip install [xxx] # any required package if necessary, maybe do not specify the version
