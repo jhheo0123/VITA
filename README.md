@@ -16,11 +16,15 @@ This repository provides a reference implementation of VITA as described in the 
 
 ### Requirements
 The code has been tested running under Python 3.10.6. The required packages are as follows:
-* pandas: 1.5.1 
-* dill: 0.3.6
-* torch: 1.8.0+cu111
-* rdkit: 2022.9.1
-* scikit-learn: 1.1.3
-* numpy: 1.23.4  
+* <span style='background-color:#f6f8fa'>pandas: 1.5.1</span>
+* <span style='background-color:#f6f8fa'>dill: 0.3.6</span>
+* <span style='background-color:#f6f8fa'>torch: 1.8.0+cu111</span>
+* <span style='background-color:#f6f8fa'>rdkit: 2022.9.1</span>
+* <span style='background-color:#f6f8fa'>scikit-learn: 1.1.3</span>
+* <span style='background-color:#f6f8fa'>numpy: 1.23.4</span>
+
+...
 
 pip install [xxx] # any required package if necessary, maybe do not specify the version
+
+...
