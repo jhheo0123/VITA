@@ -61,3 +61,25 @@ For the MIMIC-III and -IV datasets, the following files are required:
       python ddi_mask_H.py
 The processed files are already stored in the directories "data/mimic-iii" and "data/mimic-iv".
 
+### run the code
+- Navigate to the directory where the file "VITA.py" is located and execute the following.
+python VITA_main.py
+
+- here is the argument:
+  
+      usage: VITA_main.py [-h] [--Test] [--model_name MODEL_NAME] [--resume_path RESUME_PATH] [--lr LR] [--target_ddi TARGET_DDI] [--kp KP] [--dim DIM]
+
+- optional arguments:
+  
+        -h, --help                 show this help message and exit
+        --Test                     test mode
+        --model_name MODEL_NAME    model name
+        --resume_path RESUME_PATH  resume path
+        --lr LR                    learning rate
+        --batch_size               batch size 
+        --emb_dim                  dimension size of embedding
+        --max_len                  max number of recommended medications
+        --beam_size                number of ways in beam search
+
+### We encourage you to cite our paper if you have used the code in your work. You can use the following BibTex citation:
+
