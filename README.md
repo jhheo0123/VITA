@@ -3,3 +3,6 @@ This repository provides a reference implementation of VITA as described in the 
 > VITA: ‘Carefully Chosen and Weighted Less’ Is Better in Medication Recommendation  
 > Taeri Kim, Jiho Heo, Hongil Kim, Kijung Shin, Sang-Wook Kim  
 > The 38th Annual AAAI Conference on Artificial Intelligence (AAAI 2023)
+
+### Overview of VITA
+
