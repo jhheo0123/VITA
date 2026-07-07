@@ -470,39 +470,40 @@ def output_flatten(labels, logits, seq_length, m_length_matrix, med_num, END_TOK
     # Unfold the final results from multiple dimensions
     batch_size, max_seq_length = labels.size()[:2]
     assert max_seq_length == max(seq_length)
-    whole_seqs_num = seq_length.sum().item()
     if training:
-        whole_med_sum = sum([sum(buf) for buf in m_length_matrix]) + whole_seqs_num # An additional END_TOKEN will be appended after each seq
+        whole_med_sum = sum(
+            m_length_matrix[i][int(seq_length[i].item()) - 1] + 1
+            for i in range(batch_size)
+        )
 
         # Unfold the results and then compute using library functions
         labels_flatten = torch.empty(whole_med_sum).to(device)
         logits_flatten = torch.empty(whole_med_sum, med_num).to(device)
 
         start_idx = 0
-        for i in range(batch_size): # For each batch, 
-            for j in range(seq_length[i]):  # seq_length[i] indicates the number of seqs in that batch
-                for k in range(m_length_matrix[i][j]+1):  # m_length_matrix[i][j] represents the number of meds in the seq
-                    if k==m_length_matrix[i][j]:    # The last label is set as END_TOKEN
-                        labels_flatten[start_idx] = END_TOKEN
-                    else:
-                        labels_flatten[start_idx] = labels[i, j, k]
-                    logits_flatten[start_idx, :] = logits[i, j, k, :]
-                    start_idx += 1
+        for i in range(batch_size): # For each batch,
+            j = int(seq_length[i].item()) - 1
+            for k in range(m_length_matrix[i][j]+1):  # m_length_matrix[i][j] represents the number of meds in the seq
+                if k==m_length_matrix[i][j]:    # The last label is set as END_TOKEN
+                    labels_flatten[start_idx] = END_TOKEN
+                else:
+                    labels_flatten[start_idx] = labels[i, j, k]
+                logits_flatten[start_idx, :] = logits[i, j, k, :]
+                start_idx += 1
         return labels_flatten, logits_flatten
     else:
         # Unfold the results based on adm and then compute using library functions
         labels_flatten = []
         logits_flatten = []
 
-        start_idx = 0
-        for i in range(batch_size): # For each batch, 
-            for j in range(seq_length[i]):  # seq_length[i] indicates the number of sequences in this batch.
-                labels_flatten.append(labels[i,j,:m_length_matrix[i][j]].detach().cpu().numpy())
-                
-                if testing:
-                    logits_flatten.append(logits[j])  # Beam search currently directly provides the predicted results.
-                else:
-                    logits_flatten.append(logits[i,j,:max_len,:].detach().cpu().numpy())     # Note that the maximum length (max_len) is manually defined here.
+        for i in range(batch_size): # For each batch,
+            j = int(seq_length[i].item()) - 1
+            labels_flatten.append(labels[i,j,:m_length_matrix[i][j]].detach().cpu().numpy())
+
+            if testing:
+                logits_flatten.append(logits[j])  # Beam search currently directly provides the predicted results.
+            else:
+                logits_flatten.append(logits[i,j,:max_len,:].detach().cpu().numpy())     # Note that the maximum length (max_len) is manually defined here.
         return labels_flatten, logits_flatten
 
 

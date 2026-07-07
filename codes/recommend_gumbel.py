@@ -270,7 +270,7 @@ def test(model, test_dataloader, diag_voc, pro_voc, med_voc, voc_size, epoch, de
                 d_mask_matrix, p_mask_matrix, m_mask_matrix, \
                     dec_disease, stay_disease, dec_disease_mask, stay_disease_mask, \
                         dec_proc, stay_proc, dec_proc_mask, stay_proc_mask = data
-        visit_cnt += seq_length.sum().item()
+        visit_cnt += len(seq_length)
 
         output_logits, output_probs, gumbel_pick_index, cross_visit_scores_numpy = test_recommend_batch(model, data, device, TOKENS, ddi_adj, args)
 
